@@ -1,0 +1,7 @@
+Se agregan:
+
+<titles> En cada página </titles>, también Keywords y descripciones.
+
+Adicionalmente, se sube un map-site sobre el proyecto.
+
+

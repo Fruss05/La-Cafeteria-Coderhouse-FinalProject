@@ -1,0 +1,693 @@
+
+// fuente de google
+$bellefair: 'Bellefair', serif;
+
+// COLORES
+$crema: #ebe7de;
+
+
+@mixin background-image($pagina) {
+	background-image: url(../img/destacadas/chico/#{$pagina}.jpg);
+
+	@include breakpoint(medium) {
+		background-image: url(../img/destacadas/mediano/#{$pagina}.jpg);		
+	}
+	@include breakpoint(large) {
+		background-image: url(../img/destacadas/grande/#{$pagina}.jpg);
+	}	
+}
+
+body {
+	background-color: $crema;
+}
+
+.contenedor {
+	@include xy-grid-container;
+}
+
+.contenido-principal {
+	background-color: $white;
+	padding: rem-calc(10);
+	@include breakpoint(medium) {
+		margin-top: rem-calc(-120);
+		@include position(relative);
+		padding: rem-calc(50 80);
+
+	}
+}
+
+.efecto-imagen {
+ 	@include rotate(-10);
+ 	width: 90%;
+ 	@include shadow();
+ 	border: rem-calc(10) solid white;
+
+ 	@include breakpoint(small only) {
+		margin-bottom: rem-calc(70);
+ 	}	
+}
+
+blockquote {
+	font-size: rem-calc(30);
+}
+
+// Headings 
+.encabezado {
+	color: $secondary-color;
+	@include text-transform(uppercase);
+	font-size: rem-calc(18);
+	margin-bottom: rem-calc(50);
+	margin-top: rem-calc(40);
+	text-align: center;
+	width: 100%;
+	span {
+		color: $primary-color;
+		font-size: rem-calc(38);
+		display: table;
+		margin: 0 auto;
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		margin: 0 auto;
+		@include box(rem-calc(80), rem-calc(80));
+		background-size: rem-calc(80);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-image: url(../img/coffee.svg);
+		margin-top: rem-calc(-15);
+	}
+
+}
+
+.icono-menu {
+	@include hamburger($white, $white, 50px, 32px, 6px);
+}
+.site-header {
+	.contenedor {
+		z-index: 1;
+		@include position(relative);
+	}
+	@include position(relative);
+	background-repeat: no-repeat;
+	height: 100vh;
+	min-height: rem-calc(600);
+	background-size: cover;
+
+
+	&.inicio {
+		@include background-image(inicio);
+	}	
+
+	&.nosotros {
+		@include background-image(nosotros);
+	}
+
+	&.proceso {
+		@include background-image(proceso);
+	}
+	&.menu {
+		@include background-image(menu);
+	}
+	&.galeria {
+		@include background-image(galeria);
+	}
+	&.contacto {
+		@include background-image(contacto);
+	}
+
+
+	.header-superior {
+		@include xy-grid();
+		@include flex-align(center, top);
+
+		@include breakpoint(medium) {
+			@include flex-align(justify, top);
+		}
+
+		@include padding(1);
+
+		.logo {
+			@include xy-cell(6);
+			@include breakpoint(medium) {
+				@include xy-cell(25%); 
+			}
+		}
+	}
+
+	.header-slogan {
+		@include xy-grid();
+		@include flex-align(center, middle);
+		height: rem-calc(300);
+		
+		.slogan {
+			color: $white;			
+			@include font-bold(900);
+			@include text-transform(uppercase);
+
+		}
+	}
+
+	&:after{
+		background: linear-gradient(to bottom, rgba(0, 0, 0, .7) 20%, rgba(0, 0, 0, .3) );
+		content: '';
+		@include position(absolute, 0, 0, 0, 0);
+		@include box(100%, 100%);
+
+	}
+	.title-bar {
+		background-color: $primary-color;
+		justify-content: flex-end;
+	}
+	.title-bar-title {
+
+		// Mi estilo para que este en el centro
+		//margin-right: rem-calc(20);
+		margin: 0 auto;
+		padding-left: 50px;
+	}
+}
+
+/** Navegacion motion ui **/
+.menu-in {	
+	@include mui-zoom(in, 0.1, 1);
+}
+
+.menu-out {
+	@include mui-zoom(out, 1, .1);
+}
+
+
+.navegaciones {
+	@include xy-cell();
+	@include breakpoint(medium) {
+		@include xy-cell(auto);
+
+	}
+
+	.menu-principal {
+
+		@include breakpoint(small only) {
+			background-color: darken($primary-color, 10%);
+		}
+		@include menu-base();
+		@include flex-align(right, middle);
+
+		li {
+			@include breakpoint(small only) {
+				width: 100%;
+				text-align: center;
+
+			}
+
+			a {
+				@include text-transform(uppercase);
+				@include font-bold(700);
+				font-size: rem-calc(16);
+			}
+		}
+	}
+
+
+}
+
+.menu-social {
+	@include menu-base();
+	@include flex-align(center, middle);
+	margin-bottom: rem-calc(20);
+
+	@include breakpoint(medium) {
+		@include flex-align(right, middle);		
+		margin-bottom: rem-calc(30);
+
+	}
+	a {
+		&:before {
+			display: inline-block;
+			font-family: 'Fontawesome';
+			font-size: rem-calc(30);
+			color: $white;
+			-webkit-webkit-font-smoothing: antialiased;
+			content: '\f08e';
+		}
+
+		&[href*="facebook"]::before {content: '\f082'}
+		&[href*="twitter"]::before {content: '\f099'}
+		&[href*="instagram"]::before {content: '\f16d'}
+		&[href*="youtube"]::before {content: '\f082'}
+	}
+}
+.site-footer {
+	background-color: $primary-color;
+	.contenedor {
+		.contenido-footer {
+			@include xy-grid();
+			@include padding(2, 2, 4, 2);
+			background-color: white;
+			.footer-box {
+				@include xy-cell();
+				@include margin(null, null, 2);
+				@include breakpoint(medium) {
+					@include xy-cell(4);
+				}
+				text-align: center;
+
+				h3 {
+					font-family: $bellefair;
+					color: $secondary-color;
+					@include text-transform(uppercase);
+				}
+
+				p {
+					font-size: rem-calc(18);
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	.copyright {
+		margin: 0;
+		text-align: center;
+		@include padding(1, null, 1, null);
+		@include font-bold(900);
+		color: white;
+		font-size: rem-calc(15);
+	}
+}
+
+
+.pagina-nosotros {
+	@include xy-grid();
+
+	.imagen-nosotros, 
+	.contenido-nosotros {
+		@include xy-cell();
+		@include breakpoint(medium) {
+			@include xy-cell(50%);
+		}
+	}
+
+	p {
+		line-height: rem-calc(40);
+	}
+}
+
+
+
+/** PROCESO **/
+
+.pagina-proceso {	
+	@include breakpoint(medium) {
+		.contenedor-proceso {
+			@include odd() {
+				.imagen {
+					order: 2;
+				}
+				.contenido {
+					order: 1;
+				}
+			}
+
+		}
+	}
+	.contenedor-proceso {
+		@include xy-grid();
+		margin-bottom: rem-calc(30);
+		.imagen {
+			@include xy-cell();
+			@include breakpoint(medium) {
+				@include xy-cell(1 of 2);
+			}
+		}
+		.contenido {
+			@include xy-cell();
+			@include padding(2);
+			@include breakpoint(medium) {
+				@include xy-cell(1 of 2);
+			}
+
+			h3 {
+				color: $primary-color;
+				@include text-transform(uppercase);
+
+				&:after {
+					content: '';
+					display: block;
+					width: rem-calc(200);
+					height: rem-calc(2);
+					background-color: $secondary-color;
+					margin-top: rem-calc(10);
+				}
+			}
+
+			p {
+				font-size: rem-calc(18);
+				line-height: rem-calc(40);
+				margin-top: rem-calc(20);
+			}
+		}
+	}
+}
+
+
+
+/** PAGINA MENU **/
+.pagina-menu {
+	@include xy-grid();
+	padding-bottom: 0;
+	.menu-descripcion {
+		@include xy-cell();
+
+		@include breakpoint(large) {
+			@include xy-cell(5);
+		}
+
+		p {
+			text-align: center;
+			font-size: rem-calc(20);
+			line-height: rem-calc(40);
+
+
+		}
+	}
+
+	.menu-imagen {
+		@include xy-cell();
+		@include breakpoint(large) {
+			@include xy-cell(7);
+		}
+		@include flex-align(center, bottom);
+		@include flex();
+	}
+}
+
+
+
+.nuestro-menu {
+	background-image: url(../img/menu.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	background-position: center center;
+	@include padding(1, null, 4, null);
+
+
+	h2 {
+		color: white;
+
+		span {
+			color: white;
+		}
+
+		&:after {
+			display: none;
+		}
+	}
+
+	.contenedor {
+		@include position(relative);
+		z-index: 10;
+	}
+
+	&:after {
+		content: '';
+		@include position(absolute, 0, 0, 0, 0);
+		background-color: rgba(46,23,15,.85);
+	}
+}
+
+
+.menu-cafeteria {
+	@include xy-grid();
+	color: white;
+
+	h3 {
+		width: 100%;
+		@include font-bold(900);
+		font-size: rem-calc(30);
+		@include text-transform(uppercase);
+		text-align: center;
+		margin-bottom: rem-calc(40);
+	}
+
+	.listado-menu {
+		@include xy-cell();
+		@include breakpoint(medium) {
+			@include xy-cell(6);			
+		}
+
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+/** Menu de productos**/
+.producto {
+	@include xy-grid();
+	.informacion {
+		@include xy-cell(8);
+		.nombre {
+			@include text-transform(uppercase);
+			@include font-bold(900);
+			font-size: rem-calc(18);
+			margin: 0;
+		}		
+
+		.descripcion {
+			color: $secondary-color;
+			font-size: rem-calc(16);
+
+		}
+
+	}
+
+	.precio {
+		@include xy-cell(4);
+
+		p {
+			font-size: rem-calc(30);
+			@include font-bold(900);
+			text-align: right;
+		}
+	}
+}
+
+/** GALERIA **/
+
+@mixin img-grid() {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 50%;
+
+	// para que la imagen no se alarg
+}
+
+.galeria-superior {
+	@include xy-grid();
+	.izquierda {		
+		@include xy-cell(3, true, $grid-margin-gutters, margin, left);
+		.imagen {
+			height: 100%;
+			img {
+				@include img-grid();
+			}
+		}
+	}
+
+	.derecha {
+		@include xy-cell(auto, true, $grid-margin-gutters, margin, left);
+		@include flex-align();
+		.contenido-derecha {	
+			@include flex();
+			height: 100%;
+			.imagenes {
+				@include xy-grid();
+				flex: 1;
+				.imagen {
+
+					@include xy-cell(33.3%);
+					@include between(1, 2) {
+						@include xy-gutters($grid-margin-gutters, margin,bottom);					
+					}
+					@include between(3, 4) {
+						@include xy-gutters($grid-margin-gutters, margin,top);					
+					}
+					&.span {
+						@include xy-cell(66.6%);
+					}
+
+					img {
+						@include img-grid();
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+.galeria-inferior {
+	@include xy-grid();
+	margin-top: rem-calc(30);
+
+	.imagen {
+		@include xy-cell(3);
+		&.span {
+			@include xy-cell(6);
+		}
+
+		img {
+			@include img-grid();
+		}
+
+	}
+
+	.derecha {
+		@include xy-cell(auto, true, $grid-margin-gutters, margin, left);
+		@include xy-grid-collapse('.derecha', margin, left);
+
+		
+		.contenido-derecha {
+			height: 100%;
+			@include xy-grid-container();
+
+			.imagenes {
+				@include xy-grid(vertical);
+				@include flex-align();
+				height: 100%;
+				@include flex();
+
+				.imagen {
+					@include xy-cell(auto, false);
+					@include xy-grid-collapse('.imagen', margin, left right);
+					
+					@include first-child() {
+						@include xy-gutters($grid-margin-gutters, margin,bottom);		
+					}
+					@include last-child() {
+						@include xy-gutters($grid-margin-gutters, margin,top);	
+					}
+				}
+			}
+		}
+	}
+}
+
+/** PAGINA CONTACTO **/
+
+.pagina-contacto {
+	background-image: url(../img/granos_cafe.jpg);
+	background-repeat: no-repeat;
+	background-position: right center;
+
+	background-size: 30%;
+
+	@include xy-grid();
+
+	.formulario-reservacion {
+		@include xy-cell();
+		@include breakpoint(medium) {
+			@include xy-cell(9);
+		}
+		@include breakpoint(large) {
+			@include xy-cell(6);
+		}
+	}
+}
+
+.campo {
+	label {
+		font-size: rem-calc(20);
+		@include text-transform(uppercase);
+		@include font-bold();
+	}
+
+	input, select, input:focus {
+		border: rem-calc(5) solid $primary-color;
+		height: rem-calc(50);		
+	}
+
+	.btn_enviar {
+		@include font-bold();
+		@include text-transform(uppercase);
+		font-size: rem-calc(18);
+		width: 100%;
+		height: auto;
+		margin-top: rem-calc(20);
+	}
+}
+
+
+.pagina-inicio {
+	p {
+		@include breakpoint(medium) {
+			@include xy-cell(80%);
+			@include xy-cell-offset(10%);
+			text-align: center;
+			line-height: rem-calc(40);
+			font-size: rem-calc(18);
+		}
+	}
+}
+
+.categoria-iconos {
+	@include xy-grid();
+	.icono {
+		@include xy-cell();
+		@include breakpoint(medium) {
+			@include xy-cell(1 of 3);
+		}
+		height: rem-calc(260);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: rem-calc(120%);
+		
+		@include flex-align(center, bottom);
+		@include flex();
+		&.cafe {
+			background-image: url(../img/icono_cafe.svg);		
+		}
+
+		&.postre {
+			background-image: url(../img/icono_postre.svg);
+		}
+
+		&.te {
+			background-image: url(../img/icono_te.svg);
+		}
+
+		h3 {
+			font-family: $bellefair;
+			color: $primary-color;
+			font-size: rem-calc(38);
+		}
+	}
+}
+
+
+/** Slider **/
+
+.contenedor-slider {
+	@include xy-grid();
+
+	@include flex-align(center, middle);
+	.orbit {
+		background-color: $crema;
+		@include xy-cell(10);
+		border-left: rem-calc(5) solid $primary-color;
+		li {
+			div {
+				@include padding(2, 4, 2, 4);
+				h3{
+					font-size: rem-calc(20);
+				}
+			}
+		}
+	}
+}
